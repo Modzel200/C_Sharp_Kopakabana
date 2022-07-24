@@ -1,0 +1,138 @@
+﻿<Page x:Class="Project.Interface.GameplayPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Project.Interface"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GameplayPage">
+    
+    <Page.Background>
+        <ImageBrush ImageSource="/Backgrounds/menu.jpg" Stretch="Fill"/>
+    </Page.Background>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" x:Name="gameplayPhase" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" FontWeight="Bold" FontFamily="Constantia"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <Grid Margin="0,20,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Drużyna 1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="Constantia"/>
+                    <Label Grid.Row="0" Grid.Column="1" Content="Drużyna 2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="Constantia"/>
+                    <Label Grid.Row="1" Grid.Column="0" x:Name="selectedFirst" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="Constantia"/>
+                    <Label Grid.Row="1" Grid.Column="1" x:Name="selectedSecond" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="Constantia"/>
+                    <RadioButton Grid.Row="2" Grid.Column="0" GroupName="selectWinner" x:Name="radioFirst" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <RadioButton Grid.Row="2" Grid.Column="1" GroupName="selectWinner" x:Name="radioSecond" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid x:Name="judgeGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Sędzia:" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,5"/>
+                    <ComboBox Grid.Column="1" x:Name="judgeComboBox" ItemsSource="{Binding}" Margin="0,0,0,5">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding Name}" Margin="0,0,5,0"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Surname}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+                <Grid x:Name="secondaryJudgesGrid" Margin="0,0,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Sędzia pomocniczy 1:" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,5"/>
+                    <ComboBox Grid.Row="0" Grid.Column="1" x:Name="secondaryJudge1ComboBox" Margin="0,0,0,5">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding Name}" Margin="0,0,5,0"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Surname}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Sędzia pomocniczy 2:" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,5"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" x:Name="secondaryJudge2ComboBox" Margin="0,0,0,5">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding Name}" Margin="0,0,5,0"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Surname}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+                <Button x:Name="confirmButton" Content="Zatwierdź mecz" HorizontalAlignment="Center" Height="24" Width="150" Background="#FFCCE6FF" Click="Confirm_Button" Margin="0,0,0,30"/>
+                <Button Content="Wylosuj" HorizontalAlignment="Center" Height="24" Width="150" Background="#FFCCE6FF" Click="RandomScore_Button" Margin="0,0,0,10"/>
+                <Button x:Name="nextButton" Content="Przejdź dalej" HorizontalAlignment="Center" Height="24" Width="150" Background="#FFCCE6FF" Click="Next_Button" Margin="0,0,0,10"/>
+                <Button x:Name="showResultsButton" Content="Zobacz wyniki" HorizontalAlignment="Center" Height="24" Width="150" Background="#FFCCE6FF" Click="ShowResults_Button" Margin="0,0,0,10"/>
+                <Button Content="Wyjdź do menu" HorizontalAlignment="Center" Height="24" Width="150" Background="#FFCCE6FF" Click="Exit_Button" Margin="0,0,0,10"/>
+            </StackPanel>
+            <Grid Grid.Column="1" Width="300" Margin="0,0,0,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Wybierz mecz" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="Constantia"/>
+                <ListBox Grid.Row="1" x:Name="gamesList" ItemsSource="{Binding}" Width="300" BorderThickness="3" BorderBrush="Gray" SelectionChanged="OnClick">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="20"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Team1}" HorizontalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text="vs." HorizontalAlignment="Center"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Team2}" HorizontalAlignment="Center"/>
+                                <Image Grid.Column="3" Source="{Binding Picture}" Height="20" Width="20" IsEnabled="False"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
